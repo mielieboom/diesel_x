@@ -47,6 +47,14 @@ pub fn parse(
         ("Date", "NaiveDate"),
         ("Timestamp", "NaiveDateTime"),
         ("Timestamptz", "DateTime<Utc>"),
+        // newly added - todo make case insensitive
+        ("Time", "NaiveTime"),
+        ("Date", "NaiveDate"),
+        ("Datetime", "NaiveDateTime"),
+        ("Double", "f64"),
+        ("Bigint", "i64"),
+        ("Longblob", "Vec<u8>"),
+        // newly added - todo make case insensitive
         ("Float4", "f32"),
         ("Float", "f32"), //sqlite
         ("Bool", "bool"),
@@ -57,9 +65,9 @@ pub fn parse(
         ("Bytea", "Vec<u8>"),
         ("Inet", "IpNetwork"),
     ]
-    .iter()
-    .cloned()
-    .collect();
+        .iter()
+        .cloned()
+        .collect();
 
     let proto_type_dict: HashMap<&str, &str> = [
         ("Int2", "int32"),
@@ -69,6 +77,16 @@ pub fn parse(
         ("Numeric", "string"),
         ("Text", "string"),
         ("Date", "NaiveDate"),
+        // newly added
+        ("Time", "models_catalog.Time"),
+        ("Date", "models_catalog.Date"),
+        ("Datetime", "models_catalog.DateTime"),
+        ("Bigint", "int64"),
+        ("Integer", "i32"),
+        ("Double", "f64"),
+        ("Float", "f32"),
+        ("Longblob", "Vec<u8>"),
+        // newly added
         ("Timestamp", "string"),
         ("Timestamptz", "string"),
         ("Float4", "float"),
@@ -80,9 +98,9 @@ pub fn parse(
         ("Inet", "string"),
         ("Uuid", "string"),
     ]
-    .iter()
-    .cloned()
-    .collect();
+        .iter()
+        .cloned()
+        .collect();
 
     for (key, val) in model_type_mapping.iter() {
         model_type_dict.insert(&key, &val);
